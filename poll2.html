@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Resources Poll</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        form {
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        #pollResults {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        #pollResults h2 {
+            margin-bottom: 10px;
+        }
+
+        #pollResults p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Web Resources Poll</h1>
+    
+    <div class="container">
+        <form id="pollForm">
+            <p>Which domain do you prefer?</p>
+            <label>
+                <input type="radio" name="domain" value="JAVA"> JAVA 
+            </label><br>
+            <label>
+                <input type="radio" name="domain" value="PYTHON">PYTHON
+            </label><br>
+            <label>
+                <input type="radio" name="domain" value="WEB Development">WEB Development
+            </label><br>
+            <button type="submit">Submit Vote</button>
+        </form>
+        
+        <div id="pollResults">
+            <!-- Poll results will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        let results = {
+            'JAVA': 0,
+            'PYTHON': 0,
+            'WEB Development': 0,
+        };
+
+        document.getElementById('pollForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get the selected domain option
+            const selectedDomain = document.querySelector('input[name="domain"]:checked');
+
+            if (selectedDomain) {
+                // Increment the vote count for the selected option
+                const domain = selectedDomain.value;
+                results[domain]++;
+                updatePollResults();
+            }
+        });
+
+        function updatePollResults() {
+            // Display poll results
+            const pollResultsDiv = document.getElementById('pollResults');
+            pollResultsDiv.innerHTML = '<h2>Poll Results:</h2>';
+
+            for (const option in results) {
+                pollResultsDiv.innerHTML += `<p>${option}: ${results[option]} votes</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
